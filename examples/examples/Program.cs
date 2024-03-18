@@ -6,8 +6,40 @@ namespace examples
     {
         static void Main(string[] args)
         {
-            Computer computer = new Computer();
-            
+
+            // Computer.cs
+
+            Desktop desktop = new Desktop();    // Instance
+            // desktop computer'da yer alan tüm özellikleri miras aldı ve tanımlama yapılabildi
+            desktop.Id = 1;
+            desktop.CpuBrand = "Amd";
+            desktop.MotherboardBrand = "Asus";
+            desktop.GpuBrand = "Msi 4070";
+            desktop.RamCapacity = "32gb";
+            desktop.SsdSize = "512gb";
+            desktop.CaseModel = "Corsair Micro-ATX";
+            desktop.PsuModel = "Corsair 1000w";
+            desktop.LiquidCooling = true;
+
+            Laptop laptop = new Laptop();       // Instance
+            // laptop computer'da yer alan tüm özellikleri miras aldı ve tanımlama yapılabildi
+            laptop.Id = 2;
+            laptop.CpuBrand = "Intel";
+            laptop.MotherboardBrand = "Gigabyte";
+            laptop.GpuBrand = "Intel UHD Graphics";
+            laptop.RamCapacity = "32gb";
+            laptop.SsdSize = "512gb";
+            laptop.BatteryCapacity = "42wh";
+            laptop.ScreenSize = "15.6";
+            laptop.TouchScreen = false;
+
+            Laptop laptop2 = new Laptop();
+
+
+            Console.WriteLine($"Id: {laptop.Id}, CpuBrand: {laptop.CpuBrand}, MotherboardBrand: {laptop.MotherboardBrand}, GpuBrand: {laptop.GpuBrand}, RamCapacity: {laptop.RamCapacity}, SsdSize: {laptop.SsdSize}, BatteryCapacity: {laptop.BatteryCapacity}, ScreenSize: {laptop.ScreenSize}, TouchScreen: {laptop.TouchScreen}");
+
+            Console.WriteLine($"Id: {desktop.Id}, CpuBrand: {desktop.CpuBrand}, MotherboardBrand: {desktop.MotherboardBrand}, GpuBrand: {desktop.GpuBrand}, RamCapacity: {desktop.RamCapacity}, SsdSize: {desktop.SsdSize}, CaseModel: {desktop.CaseModel}, PsuModel: {desktop.PsuModel}, LiquidCooling: {desktop.LiquidCooling}");
+
             Console.ReadLine();
         }
     }
