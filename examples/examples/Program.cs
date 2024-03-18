@@ -7,7 +7,7 @@ namespace examples
         static void Main(string[] args)
         {
 
-            // Computer.cs
+            // 1 - Computer.cs (inheritance)
 
             Desktop desktop = new Desktop();    // Instance
             // desktop computer'da yer alan tüm özellikleri miras aldı ve tanımlama yapılabildi
@@ -39,6 +39,25 @@ namespace examples
             Console.WriteLine($"Id: {laptop.Id}, CpuBrand: {laptop.CpuBrand}, MotherboardBrand: {laptop.MotherboardBrand}, GpuBrand: {laptop.GpuBrand}, RamCapacity: {laptop.RamCapacity}, SsdSize: {laptop.SsdSize}, BatteryCapacity: {laptop.BatteryCapacity}, ScreenSize: {laptop.ScreenSize}, TouchScreen: {laptop.TouchScreen}");
 
             Console.WriteLine($"Id: {desktop.Id}, CpuBrand: {desktop.CpuBrand}, MotherboardBrand: {desktop.MotherboardBrand}, GpuBrand: {desktop.GpuBrand}, RamCapacity: {desktop.RamCapacity}, SsdSize: {desktop.SsdSize}, CaseModel: {desktop.CaseModel}, PsuModel: {desktop.PsuModel}, LiquidCooling: {desktop.LiquidCooling}");
+
+            Console.WriteLine("********************");
+
+            // 2 - Vehicle.cs (inheritance)
+            Airplane airplane = new Airplane ();
+            airplane.Brand = "Boeing";
+            airplane.Year = 2020;
+            airplane.WingCount = 2;
+            airplane.PassengerCapacity = 300;
+
+            Ship ship = new Ship ();
+            ship.Brand = "Royal Caribbean";
+            ship.Year = 2015;
+            ship.ShipType = "Cruise Ship";
+            ship.CarryingCapacity = 5000;
+
+            Console.WriteLine("Airplane Brand: " + airplane.Brand);
+
+            Console.WriteLine("Ship Type: " + ship.ShipType);
 
             Console.ReadLine();
         }
