@@ -1,6 +1,7 @@
 ﻿using examples._01_Inheritance;
 using examples._02_Polymorphism;
 using examples._03_Interface;
+using examples._05_GenericType;
 using examples.AbstractClass;
 
 namespace examples
@@ -118,6 +119,19 @@ namespace examples
             // Her ikisi de Print metodunu çağırabilir
             rectangle2.Print();
             circle2.Print();
+
+            Console.WriteLine("********************");
+
+            // 8 - Kutu.cs (Generic Type)
+            Kutu<string> stringKutu = new Kutu<string>("Merhaba Dünya");
+            Console.WriteLine("String Kutu İçeriği: " + stringKutu.Icerik);
+            Kutu<int> intKutu = new Kutu<int>(42);
+            Console.WriteLine("Integer Kutu İçeriği: " + intKutu.Icerik);
+            Kutu<double> doubleKutu = new Kutu<double>(3.14);
+            Console.WriteLine("Double Kutu İçeriği: " + doubleKutu.Icerik);
+            Kutu<char> charKutu = new Kutu<char>('A');
+            Console.WriteLine("Char Kutu İçeriği: " + charKutu.Icerik);
+
 
             Console.ReadLine();
         }
