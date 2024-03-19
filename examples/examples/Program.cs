@@ -2,6 +2,7 @@
 using examples._02_Polymorphism;
 using examples._03_Interface;
 using examples._05_GenericType;
+using examples._06_Encapsulation;
 using examples.AbstractClass;
 
 namespace examples
@@ -131,6 +132,17 @@ namespace examples
             Console.WriteLine("Double Kutu İçeriği: " + doubleKutu.Icerik);
             Kutu<char> charKutu = new Kutu<char>('A');
             Console.WriteLine("Char Kutu İçeriği: " + charKutu.Icerik);
+
+            Console.WriteLine("********************");
+
+            // 9 - BankaHesabi.cs (Encapsulation)
+            BankaHesabi hesap = new BankaHesabi("Ali", 1000);
+            // Bakiyeyi görüntüleme
+            Console.WriteLine($"Mevcut bakiye: {hesap.GetBakiye()} TL");
+            // Para yatırma işlemi
+            hesap.SetParaYatir(500);
+            // Para çekme işlemi
+            hesap.SetParaCek(500);
 
 
             Console.ReadLine();
