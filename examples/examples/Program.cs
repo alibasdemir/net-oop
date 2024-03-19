@@ -1,6 +1,7 @@
 ﻿using examples._01_Inheritance;
 using examples._02_Polymorphism;
 using examples._03_Interface;
+using examples.AbstractClass;
 
 namespace examples
 {
@@ -44,13 +45,13 @@ namespace examples
             Console.WriteLine("********************");
 
             // 2 - Vehicle.cs (inheritance)
-            Airplane airplane = new Airplane ();
+            Airplane airplane = new Airplane();
             airplane.Brand = "Boeing";
             airplane.Year = 2020;
             airplane.WingCount = 2;
             airplane.PassengerCapacity = 300;
 
-            Ship ship = new Ship ();
+            Ship ship = new Ship();
             ship.Brand = "Royal Caribbean";
             ship.Year = 2015;
             ship.ShipType = "Cruise Ship";
@@ -106,6 +107,17 @@ namespace examples
             // Her ikisi de Print metodunu çağırabilir
             rectangle.Print();
             circle.Print();
+
+            Console.WriteLine("********************");
+
+            // 7 - AbstractPrintable.cs (Abstract Class)
+            // AbstractPrintable sınıfından türetilen Rectangle ve Circle nesneleri oluşturuluyor
+            AbstractPrintable rectangle2 = new Rectangle2();
+            AbstractPrintable circle2 = new Circle2();
+
+            // Her ikisi de Print metodunu çağırabilir
+            rectangle2.Print();
+            circle2.Print();
 
             Console.ReadLine();
         }
