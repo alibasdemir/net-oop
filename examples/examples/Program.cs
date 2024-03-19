@@ -59,6 +59,14 @@ namespace examples
 
             Console.WriteLine("Ship Type: " + ship.ShipType);
 
+            Console.WriteLine("********************");
+
+            // 3 - Animal.cs (inheritance)
+            Cat cat = new Cat(4, "female", "British");
+            Dog dog = new Dog(6, "male", "protective");
+            dog.DisplayDogDetails();
+
+
             Console.ReadLine();
         }
     }
