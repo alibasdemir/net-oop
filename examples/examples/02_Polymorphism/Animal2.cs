@@ -2,7 +2,7 @@
 
 // Polimorfizm, farklı nesnelerin aynı yöntemi çağırmasıyla ilgili bir kavramdır. Bu, farklı türlerdeki nesnelerin aynı şekilde davranabileceği anlamına gelir. C# gibi nesne yönelimli programlama dillerinde, polimorfizmi genellikle kalıtım (inheritance) ve arayüzler (interfaces) kullanarak elde edilir.
 
-    // Interface ile polymorphism
+    // Inheritance ile polymorphism
 {
     public class Animal2
     {
