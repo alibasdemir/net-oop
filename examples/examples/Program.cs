@@ -1,4 +1,5 @@
 ﻿using examples._01_Inheritance;
+using examples._02_Polymorphism;
 
 namespace examples
 {
@@ -66,6 +67,21 @@ namespace examples
             Dog dog = new Dog(6, "male", "protective");
             dog.DisplayDogDetails();
 
+            Console.WriteLine("********************");
+
+            // 4 - Animal2.cs (polymorphism)
+            Animal2[] animal2 = new Animal2[3];
+            animal2[0] = new Sheep();
+            animal2[1] = new Bird();
+            animal2[2] = new Cow();
+
+            foreach (var animals in animal2)
+            {
+                animals.Sound();
+            }
+
+            Duck duck = new Duck();
+            duck.Sound();
 
             Console.ReadLine();
         }
