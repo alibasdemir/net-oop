@@ -9,7 +9,6 @@ namespace examples
         {
 
             // 1 - Computer.cs (inheritance)
-
             Desktop desktop = new Desktop();    // Instance
             // desktop computer'da yer alan tüm özellikleri miras aldı ve tanımlama yapılabildi
             desktop.Id = 1;
@@ -77,11 +76,24 @@ namespace examples
 
             foreach (var animals in animal2)
             {
-                animals.Sound();
+                animals.Sound(); // Her bir nesne aynı metodu çağırır, ancak farklı davranır.
             }
 
             Duck duck = new Duck();
             duck.Sound();
+
+            Console.WriteLine("********************");
+
+            // 5 - Pass.cs (polymorphism/interface)
+            IPass[] passes = new IPass[3];
+            passes[0] = new StudentPass();
+            passes[1] = new StaffPass();
+            passes[2] = new VisitorPass();
+
+            foreach (var pass in passes)
+            {
+                pass.Scan(); // Her bir nesne aynı metodu çağırır, ancak farklı davranır.
+            }
 
             Console.ReadLine();
         }
