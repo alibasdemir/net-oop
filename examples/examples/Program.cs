@@ -1,5 +1,6 @@
 ﻿using examples._01_Inheritance;
 using examples._02_Polymorphism;
+using examples._03_Interface;
 
 namespace examples
 {
@@ -94,6 +95,17 @@ namespace examples
             {
                 pass.Scan(); // Her bir nesne aynı metodu çağırır, ancak farklı davranır.
             }
+
+            Console.WriteLine("********************");
+
+            // 6 - IPrintable.cs (interface)
+            // IPrintable interface'ini kullanarak Rectangle ve Circle nesneleri oluşturuluyor
+            IPrintable rectangle = new Rectangle();
+            IPrintable circle = new Circle();
+
+            // Her ikisi de Print metodunu çağırabilir
+            rectangle.Print();
+            circle.Print();
 
             Console.ReadLine();
         }
