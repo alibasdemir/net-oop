@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Application.Pipelines.Authorization;
 
 namespace Business
 {
@@ -22,6 +23,9 @@ namespace Business
             services.AddMediatR(configuration => {
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); // mediatr ekledik ve assebmly'e ihtiyaç duyduğu için configuration içinde assembly ekledik
                 configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));  // SIRALAMA ÖNEMLİ LOGLAMA Validasyondan önce çalışmalıki validasyon hatası alsak bile loglama çalışsın.
+
+                configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));    // sıralama önemli olduğu için loggingden sonra ekledik. kullanıcı giriş yapmamışsa bile loglama yapmak isteriz bu yüzden buraya ekledik
+
                 configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));    // Kullanacağımız behavior'ı ekledik. ve bizden ValidationBehavior bir request ve bir response istiyor, biz bunu kıstasa uyan tüm tipler için uygulamak istiyorsak <,> arasına virgül koyarız. Yani typeof dediğimiz için bu kıstasa uyan tüm tipleri kabul et demiş oluyoruz
             });  
 

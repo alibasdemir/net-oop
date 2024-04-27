@@ -47,7 +47,7 @@ namespace Business.Features.Products.Commands.Create
                 Product? productWithSameName = await _productRepository.GetAsync(p => p.Name == request.Name);
                 if (productWithSameName is not null)
                 {
-                    throw new System.Exception("Aynı isimde 2. ürün eklenemez");
+                    throw new BusinessException("Aynı isimde 2. ürün eklenemez");
                 }
 
                 // KATEGORİ VERİLERİNE ULAŞMAK

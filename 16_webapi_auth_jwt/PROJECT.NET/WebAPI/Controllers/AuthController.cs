@@ -28,8 +28,8 @@ namespace WebAPI.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
         {
-            await _mediator.Send(loginCommand);
-            return Ok();
+            var response = await _mediator.Send(loginCommand);
+            return Ok(response);
         }
     }
 }

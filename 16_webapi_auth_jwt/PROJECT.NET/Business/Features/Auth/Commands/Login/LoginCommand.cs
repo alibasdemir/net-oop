@@ -1,5 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Hashing;
+using Core.Utilities.JWT;
 using DataAccess.Abstracts;
 using Entities;
 using MediatR;
@@ -12,22 +13,24 @@ using System.Threading.Tasks;
 
 namespace Business.Features.Auth.Commands.Login
 {
-    public class LoginCommand : IRequest
+    public class LoginCommand : IRequest<AccessToken>   // Loginin artık AccessToken döneceğini söylüyoruz
     {
         public string Email { get; set; }
         public string Password { get; set; }
 
 
-        public class LoginCommandHandler : IRequestHandler<LoginCommand>
+        public class LoginCommandHandler : IRequestHandler<LoginCommand, AccessToken>
         {
             private readonly IUserRepository _userRepository;
+            private readonly ITokenHelper _tokenHelper; // kullanıcı giriş yaptığında token üretmek istiyoruz bu yüzden ITokenHelper'ı ekliyoruz. dependency injection
 
-            public LoginCommandHandler(IUserRepository userRepository)
+            public LoginCommandHandler(IUserRepository userRepository, ITokenHelper tokenHelper)
             {
                 _userRepository = userRepository;
+                _tokenHelper = tokenHelper;
             }
 
-            public async Task Handle(LoginCommand request, CancellationToken cancellationToken)
+            public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
                 User? user = await _userRepository.GetAsync(i=>i.Email == request.Email);  // Email'i request.email'ine eşit olan kullanıcı. email kontrolü yapıyoruz.
 
@@ -49,6 +52,8 @@ namespace Business.Features.Auth.Commands.Login
                 }   // şifre uyuşmuyorsa giriş başarısız dönüyoruz
 
                 // --- NOT --- => GİRİŞ YAPILIRKEN VERİLEN HATA MESAJLARININ AYNI VERİLMESİ BEST PRACTICE'DIR. BU ÖRNEĞİMİZDE OLDUĞU GİBİ "Giriş Başarısız." ŞEKLİNDE. Çünkü örneğin e-postanın sistemde kayıtlı olup olmadığı konusunda güvenlik zaafiyeti vermek istemeyiz. Bu yüzden hatanın epostanın kayıtlı olduğu mu yoksa şifrenin yanlış olduğundan mı kaynaklı olduğunu net şekilde belirtmeyiz. Bu yüzden genellikle sistemlerde "Eposta veya şifreniz hatalı" şeklinde hata mesajı gösterir. Hangisinin hatalı olduğunu direkt olarak söylemez.
+
+                return _tokenHelper.CreateToken(user);
             }
         }
     }

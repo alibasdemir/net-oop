@@ -22,11 +22,10 @@ namespace WebAPI.Controllers
 
         private readonly IMediator _mediator;   // mediatr bağımlılığı ekledik
 
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateProductCommand command)  // KULLANICIDAN ARTIK DTO TALEP ETMEK YERİNE COMMAND'IN KENDİSİNİ TALEP EDEREK SADECE METIATOR SEN BU KOMUTU SEND ET DİYORUZ
