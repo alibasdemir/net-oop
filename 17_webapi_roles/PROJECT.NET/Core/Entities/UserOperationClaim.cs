@@ -16,9 +16,11 @@ namespace Core.Entities
 
         // --- ÖNEMLİ NOT --- İLİŞKİLERDE ARA TABLO BİLE OLSA VIRTUAL ALANLARI EKLEMEYİ UNUTMUYORUZ
 
-        public virtual BaseUser User { get; set; }
-        public virtual OperationClaim OperationClaim { get; set; }
+        //public virtual BaseUser User { get; set; }
+        //public virtual OperationClaim OperationClaim { get; set; }
 
-        // NOT2: AYRICA OLUŞTURDUĞUMUZ TABLOLARI BASEDBCONTEXT'E EKLEMEYİ UNUTMUYORUZ (OperationClaim ve UserOperationClaim)
+        // --- ÖNEMLİ NOT 2 --- Üstteki virtual alanları kaldırmamızın nedeni migration sonrası bize BaseUser adında bir tablo daha oluşturmaya çalışıyor biz bunu istemiyoruz. ef zaten bu alanları da otomatik algılayacağı için kullanmamıza gerek yok. Soyutlama avantajlarından vazgeçmek istemediğimiz için bu yolu tercih ediyoruz.
+ 
+        // NOT3: AYRICA OLUŞTURDUĞUMUZ TABLOLARI BASEDBCONTEXT'E EKLEMEYİ UNUTMUYORUZ (OperationClaim ve UserOperationClaim)
     }
 }

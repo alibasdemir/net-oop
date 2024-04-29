@@ -17,6 +17,8 @@ namespace DataAccess
             services.AddScoped<IProductRepository, EfProductRepository>();
             services.AddScoped<ICategoryRepository, EfCategoryRepository>();
             services.AddScoped<IUserRepository, EfUserRepository>();    // Yeni eklediğimiz repository'i registration yapıyoruz
+            services.AddScoped<IUserOperationClaimRepository, EfUserOperationClaimRepository>();
+            services.AddScoped<IOperationClaimRepository, EfOperationClaimRepository>();
             services.AddDbContext<BaseDbContext>();
 
             

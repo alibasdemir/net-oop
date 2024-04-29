@@ -53,6 +53,8 @@ namespace Business.Features.Auth.Commands.Login
 
                 // --- NOT --- => GİRİŞ YAPILIRKEN VERİLEN HATA MESAJLARININ AYNI VERİLMESİ BEST PRACTICE'DIR. BU ÖRNEĞİMİZDE OLDUĞU GİBİ "Giriş Başarısız." ŞEKLİNDE. Çünkü örneğin e-postanın sistemde kayıtlı olup olmadığı konusunda güvenlik zaafiyeti vermek istemeyiz. Bu yüzden hatanın epostanın kayıtlı olduğu mu yoksa şifrenin yanlış olduğundan mı kaynaklı olduğunu net şekilde belirtmeyiz. Bu yüzden genellikle sistemlerde "Eposta veya şifreniz hatalı" şeklinde hata mesajı gösterir. Hangisinin hatalı olduğunu direkt olarak söylemez.
 
+                // KULLANICI ROLLERİNİ SORGULA
+
                 return _tokenHelper.CreateToken(user);
             }
         }
