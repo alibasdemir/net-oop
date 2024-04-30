@@ -19,8 +19,10 @@ namespace Core.Entities
         //public virtual BaseUser User { get; set; }
         //public virtual OperationClaim OperationClaim { get; set; }
 
-        // --- ÖNEMLİ NOT 2 --- Üstteki virtual alanları kaldırmamızın nedeni migration sonrası bize BaseUser adında bir tablo daha oluşturmaya çalışıyor biz bunu istemiyoruz. ef zaten bu alanları da otomatik algılayacağı için kullanmamıza gerek yok. Soyutlama avantajlarından vazgeçmek istemediğimiz için bu yolu tercih ediyoruz.
- 
-        // NOT3: AYRICA OLUŞTURDUĞUMUZ TABLOLARI BASEDBCONTEXT'E EKLEMEYİ UNUTMUYORUZ (OperationClaim ve UserOperationClaim)
+        // --- ÖNEMLİ NOT --- BU VIRTUAL ALANLARI CORE PAKETİ HİÇBİR YERE BAĞIMLI OLMADAN YAZMAMIZ GEREKİYOR BU YÜZDEN ENTITES KATMANINDA UserOperationClaim oluşturuyoruz ve virtual alanları oraya ekliyoruz. Ayrıca BaseDbContext'te ki en üstte yer alan using Core.Entities'i siliyoruz ve sadece using Entites kullanıyoruz. User.cs içine UserOperationClaim alanını List şeklinde virtual olarak eklemeyi unutmuyoruz 
+
+        // NOT2: AYRICA OLUŞTURDUĞUMUZ TABLOLARI BASEDBCONTEXT'E EKLEMEYİ UNUTMUYORUZ (OperationClaim ve UserOperationClaim)
+
+
     }
 }

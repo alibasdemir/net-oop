@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,20 +34,26 @@ namespace Core.DataAccess
             Context.SaveChanges();
 
         }
-
-        public TEntity? Get(Expression<Func<TEntity, bool>>? predicate = null)   // artık Get IRepository.cs'de ki gibi bir imzaya sahip bu yüzden burayı güncelledik. Null eğer varsayılan bir değer gönderilmemişse varsayılan değerdir.
+        // FILTER
+        public TEntity? Get(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)   // artık Get IRepository.cs'de ki gibi bir imzaya sahip bu yüzden burayı güncelledik. ---2- listelerken ve veriyi getirken include işlemi de sağlamak istiyoruz bu yüzden buraya join yapısını ekliyoruz -> Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null) ---> <TEntity, object> sol taraf hangi tablodan sağ taraf hangi tabloya join olduğumuzu belirtiyor ancak biz genel bir kod yazdığımız için hangi tabloya join olduğumuzu şuan umursamıyoruz o yüzden object dedik yani herhangi bir obje. Ardından altta eğer include null değilse bu datayı include et diyoruz.
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
-                
+
+            if (include != null)
+                data = include(data);   // include null değilse datayı include et yani join metodunun c#'da yazılmış hali
+
             return data.FirstOrDefault(predicate);                       
         }
 
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate)     // artık GetList IRepository.cs'de ki gibi bir imzaya sahip bu yüzden burayı güncelledik.
+        // FILTER
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null)     // artık GetList IRepository.cs'de ki gibi bir imzaya sahip bu yüzden burayı güncelledik. Null eğer varsayılan bir değer gönderilmemişse varsayılan değerdir. ---2- listelerken ve veriyi getirken include işlemi de sağlamak istiyoruz bu yüzden buraya join yapısını ekliyoruz -> Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null) ---> <TEntity, object> sol taraf hangi tablodan sağ taraf hangi tabloya join olduğumuzu belirtiyor ancak biz genel bir kod yazdığımız için hangi tabloya join olduğumuzu şuan umursamıyoruz o yüzden object dedik yani herhangi bir obje. Ardından altta eğer include null değilse bu datayı include et diyoruz.
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();  // IQueryable üzerine query yazılabilen bir tiptir. veri setimizi bu tipte ele alabiliriz
 
             if(predicate != null)
                 data = data.Where(predicate);                   // predicate boş değilse yani filtrelenmişse filtrelenmiş datayı getir
+            if(include != null)
+                data = include(data);   // include null değilse datayı include et yani join metodunun c#'da yazılmış hali
 
             return data.ToList();                               // eğer boşsa filtrelenmemiş datayı getir
         }
@@ -70,18 +77,25 @@ namespace Core.DataAccess
             Context.Remove(entity);         // DELETE İŞLEMİNDE REMOVE KISMINI ASENKRON YAPMAYA GEREK YOKTUR.
             await Context.SaveChangesAsync();
         }
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)   // ---2- listelerken ve veriyi getirken include işlemi de sağlamak istiyoruz bu yüzden buraya join yapısını ekliyoruz -> Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null) ---> <TEntity, object> sol taraf hangi tablodan sağ taraf hangi tabloya join olduğumuzu belirtiyor ancak biz genel bir kod yazdığımız için hangi tabloya join olduğumuzu şuan umursamıyoruz o yüzden object dedik yani herhangi bir obje. Ardından altta eğer include null değilse bu datayı include et diyoruz.
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
+            if (include != null)
+                data = include(data);   // include null değilse datayı include et yani join metodunun c#'da yazılmış hali
+
             return await data.FirstOrDefaultAsync(predicate);
         }
-        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null)
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)      // ---2- listelerken ve veriyi getirken include işlemi de sağlamak istiyoruz bu yüzden buraya join yapısını ekliyoruz -> Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null) ---> <TEntity, object> sol taraf hangi tablodan sağ taraf hangi tabloya join olduğumuzu belirtiyor ancak biz genel bir kod yazdığımız için hangi tabloya join olduğumuzu şuan umursamıyoruz o yüzden object dedik yani herhangi bir obje. Ardından altta eğer include null değilse bu datayı include et diyoruz.
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
             if (predicate != null)
                 data = data.Where(predicate);
+
+            if (include != null)
+                data = include(data);   // include null değilse datayı include et yani join metodunun c#'da yazılmış hali
+
             return await data.ToListAsync();
         }
         public async Task UpdateAsync(TEntity entity)

@@ -16,6 +16,8 @@ namespace Business.Features.Products.Queries.GetList
         public int Page { get; set; }
         public int PageSize { get; set; }
 
+        public string[] RequiredRoles => ["Product.Add", "Product.Update"];     // Product.Add veya Product.Update rolüne sahipse AuthorizationBehavior'da ki 34.satırdaki komutu çalıştırabilir ( bool hasAnyRole = userRoles.FirstOrDefault(i => i == "Admin" || request.RequiredRoles.Contains(i)).IsNullOrEmpty(); )
+
         public class GetListQueryHandler : IRequestHandler<GetListQuery, List<GetAllProductResponse>>  // handler da içerisine handle edeceği command ya da query'i ve varsa dönüş tipini alır.
         {
             private readonly IProductRepository _productRepository;

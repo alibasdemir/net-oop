@@ -9,6 +9,6 @@ namespace Core.Utilities.JWT
 {
     public interface ITokenHelper
     {
-        AccessToken CreateToken(BaseUser user);
+        AccessToken CreateToken(BaseUser user, List<OperationClaim> operationClaims);   // token üretirken ITokenHelper'ın dışarıdan OperationClaim listesi istemesini sağlıyoruz. JwtHelper'a da ekleyeceğiz
     }
 }

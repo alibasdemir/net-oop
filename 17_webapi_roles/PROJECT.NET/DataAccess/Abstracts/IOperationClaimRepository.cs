@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess;
-using Core.Entities;
+using Entities;     // Core.Entites değil Entites olmalı (Enties içine OperationClaim ekleme işlemlerinden sonra)
 using System;
 using System.Collections.Generic;
 using System.Linq;

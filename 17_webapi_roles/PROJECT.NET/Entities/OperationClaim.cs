@@ -1,6 +1,4 @@
-﻿using Core.DataAccess;
-using Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class User : BaseUser
+    public class OperationClaim : Core.Entities.OperationClaim
     {
-        // User'ın içinde UserOperationClaim ile ortak tabloyla çalıştığımız alandır. Virtual olarak ekliyoruz
+        //OperationClaim içinde UserOperationClaim listesi var. Ara tabloyla ilişkili olduğu. Bunu virtual olarak ekliyoruz
         public virtual List<UserOperationClaim> UserOperationClaim { get; set; }
     }
 }
