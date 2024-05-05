@@ -17,6 +17,7 @@ namespace Application
                 config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
     }
