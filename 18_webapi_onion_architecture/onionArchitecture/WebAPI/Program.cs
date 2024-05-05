@@ -1,5 +1,7 @@
 using Persistence;
 using Application;
+using Core;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddCoreServices();
 
 var app = builder.Build();
 
@@ -20,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionMiddlewareExtensions();
 
 app.UseHttpsRedirection();
 
